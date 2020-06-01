@@ -1,16 +1,15 @@
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '123456',
-  database : 'nodeadmin'
-});
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
-});
+var mysql = require('mysql');
+var db_config = require('../config/config');
 
-module.exports = {  connection };
+var knex = require('knex')({
+  client:'mysql',
+  connection:{
+    host:db_config.mysql.host,
+    port:db_config.mysql.port,
+    user:db_config.mysql.user,
+    password:db_config.mysql.password,
+    database:db_config.mysql.db
+  }
+})
+
+module.exports = {  mysql:knex };

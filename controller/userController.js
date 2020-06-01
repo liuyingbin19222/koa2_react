@@ -1,4 +1,3 @@
-// import {adminLogin , UserLogin , CreateUser } from '../model/user/admin';
 const  { adminLogin , UserLogin , CreateUser , getUserInfo } = require('../model/user/admin')
 /**
  * @description: 管理员登陆使用admin 账号， 普通用户登陆使用普通账号;
@@ -12,41 +11,21 @@ const  { adminLogin , UserLogin , CreateUser , getUserInfo } = require('../model
  */
 
 exports.Login_koa = async ( ctx ) => {
-    var request = ctx.request.body;
-    console.log(ctx.request);
-    if(request.username == 'admin'){
-        await adminLogin(request.username , request.password,(res)=>{
-            if(res.status == 1){
-                _res = { 
-                    status:1,
-                    message:'管理员登陆成功',
-                    session:'mysession' // 存储session , 暂时未实现;
-                };
-                return _res;
-            }else if(res.status == 0) {
-                _res = {
-                    status:result.status,
-                    message:'密码错误',
-                    session:'mysession'
-                } 
-                return _res;
-            }else if(res.status == -1){
-                _res = {
-                    status:result.status,
-                    message:'管理员用户不存在',
-                    session:'mysession'
-                }
-                return _res;
-            }else {
-                _res = {
-                    status:-2,
-                    message:'未知错误',
-                    seesion:'mysession'
-                }
-                return _res;
-            }
-        });
-    
+    var { username , password } = ctx.request.body;
+    console.log(ctx.request.body);
+    if(username == 'admin'){
+         const result = await adminLogin(username);
+         if(password == result.password){
+             ctx.body = {
+                 status:1,
+                 message:'login successfully'
+             }
+         }else {
+             ctx.body = {
+                 status:0,
+                 message:'login unsuccessfully'
+             }
+         }
     }else {
 
     }
