@@ -2,10 +2,11 @@
 
 const db_config = {
     host:'localhost',
-    port:8084,
+    port:3306,
     user:'root',
     db:'nodeadmin',
-    password:'123456'
+    password:'123456',
+    char: 'utf8mb4'
 }
 
 module.exports ={

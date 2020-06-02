@@ -6,7 +6,7 @@
 
 const {
     mysql
-} = require('../../config/config'); // config中数据库配置， 使用knex集中管理;
+} = require('../db'); // config中数据库配置， 使用knex集中管理;
 
 const userModel = 'think_user';
 

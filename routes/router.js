@@ -1,9 +1,8 @@
 // import {Login} from '../controller/userController'
-const {Login_koa , getUserInfo} = require('../controller/userController')
+const {Login_koa } = require('../controller/userController')
 exports.router = {
     UserModel:{
         Login_koa:Login_koa,
-        getUserInfo:getUserInfo
     }
 
 };

@@ -1,15 +1,14 @@
-var mysql = require('mysql');
 var db_config = require('../config/config');
 
 var knex = require('knex')({
   client:'mysql',
   connection:{
-    host:db_config.mysql.host,
-    port:db_config.mysql.port,
-    user:db_config.mysql.user,
-    password:db_config.mysql.password,
-    database:db_config.mysql.db
+    host:db_config.host,
+    port:db_config.port,
+    user:db_config.user,
+    password:db_config.password,
+    database: db_config.db
   }
 })
 
-module.exports = {  mysql:knex };
+module.exports = { mysql: knex }
