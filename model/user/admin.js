@@ -5,21 +5,30 @@
  */
 
 const {
-    mysql
+    connection
 } = require('../db'); // config中数据库配置， 使用knex集中管理;
+const {
+    db_config 
+} = require('../../config/config');
 
 const userModel = 'think_user';
 
 const  adminLogin = async (username) =>{
-    const result = await mysql(userModel).where({
-        username:username
+    console.log("db_config对象:",db_config);
+    var result;
+    connection.connect();
+    
+    connection.query(`select ${username} from  ${userModel}`, function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows[0]);
+        if(rows.length>0){
+            result =  rows[0];
+        }else{
+            result =  [];
+        }
     });
-    if(result.length > 0){
-        console.log("result:",result);
-        return result; // 希望是一个数组，别是数据杂乱的对象就好了。
-    }else {
-        return [];
-    }
+    connection.end();
+    return result;
 }
 const  UserLogin = (username , password) => {
     const result = connection.query(`select ${username} from ${userModel}`);

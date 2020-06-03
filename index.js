@@ -10,8 +10,9 @@ app.use(koaBody());
 koarouter.post('/Login_koa',router.UserModel.Login_koa);
 // koarouter.get('/getUserInfo',router.UserModel.getUserInfo);
 
-app.use(koarouter.routes(), koarouter.allowedMethods())
-app.listen(8000);
+app.use(koarouter.routes());
+app.use(koarouter.allowedMethods())
+app.listen(8080);
 app.on('error',(ctx)=>{
     console.log(ctx);
 });

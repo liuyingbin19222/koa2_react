@@ -16,7 +16,8 @@ async function Login_koa ( ctx )  {
     console.log(ctx.request.body);
     if(username == 'admin'){
          const result = await adminLogin(username);
-         if(password == result.password){
+         console.log("result对象:",result);
+         if(password == result[0].password){
              ctx.body = {
                  status:1,
                  message:'login successfully'
